@@ -1,12 +1,12 @@
 # Zara Sales Analysis
 
-A business analysis built on Zara product sales data through data preparation with the raw CSV and cleaning in Python/pandas, loading into PostgreSQL, analyzing with SQL, and visualizing in matplotlib.
+An ETL pipeline and business analysis built on Zara product sales data through data preparation with the raw CSV and cleaning in Python/pandas, loading into PostgreSQL, analyzing with SQL, and visualizing in matplotlib.
 
 ## Overview
 
 What are drivers for sales and revenue at Zara, and do they work the same way across menswear and womenswear?
 
-This analysis found that there are several visible effects after segmenting by section at the aggregate level. Notable levers include promotion and product placement.
+This analysis found that there are notable influences, especially after segmenting by section at the aggregate level. Some levers include promotion and product placement.
 
 ## Data Source
 
@@ -25,22 +25,22 @@ One row per product.
 
 - Dropped columns not relevant to the analysis
 - Standardized column names to snake_case
-- Dropped a row with missing product name
-- Dropped three columns (product_category, brand, currency) that each holding a single value across all 251 rows, thus carrying no analytical significance
-- Renamed columns (e.g. terms->category)
+- Dropped a row with missing value (name column)
+- Dropped three columns (product_category, brand, currency) that each hold a single value for all 251 rows, thus carrying no analytical significance
+- Renamed column (terms->category)
 - Verified no duplicate rows
-- Derived new product_revenue column as price × sales_volume
+- Created new product_revenue column as price × sales_volume
 
 3. **Load**
-   Written to a local PostgreSQL database (zara_sales, table zara_products) via SQLAlchemy.
+   Written to local PostgreSQL database (zara_sales, table zara_products) through SQLAlchemy.
 
 ## Key Insights
 
-- Menswear generates 91.5% of revenue at nearly double the average price ($92 vs. $50)
-- Womenswear products sell more when promoted; menswear products sell less.
-- Front-of-store placement outperforms in both men and women sections. The weakest position differs: Aisle for women, End-cap for men.
-- Kackets lead on revenue per product; shoes lead on units sold at a lower average price.
-- Luxury products are the smallest prive tier by product count, yet have the highest total and average revenue. Mid-range products drive the most sales volume.
+- Menswear generates 91.5% of revenue at nearly double the average price ($92 vs. $50). There is heavy gap between mens vs womens product data available.
+- Womenswear products sell more when promoted; menswear products sell less when promoted.
+- Front-of-store performs best for produc placement in both men and women sections. The weakest placement is Aisle for women, End-cap for men.
+- Jackets lead through revenue per product; shoes lead through mores units sold at a lower average price.
+- Luxury products are the smallest price tier by product count, yet have the highest total and average revenue. Mid-range products drive the most sales volume.
 - Seasonality of products shows a notable effect only in womenswear. The share of products on promotion are identical between seasonal and non-seasonal products, ruling it out as the driver.
 
 ## Tools Used
@@ -49,29 +49,37 @@ Python (pandas, SQLAlchemy, matplotlib, seaborn), PostgreSQL, SQL (CTEs, window 
 
 ## How to Run
 
-\`\`\`bash
+```
 brew install postgresql@18
 brew services start postgresql@18
 createdb zara_sales
+```
 
 **Setup**
-\`\`\`
+
+```
 git clone https://github.com/razikarahman/zara-sales-analysis.git
 cd zara-sales-analysis
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+```
 
-Update DB_USER in etl.py to your PostgreSQL username (find it with whoami).
-
+Update DB_USER in etl.py to your PostgreSQL username (can be found with command 'whoami'). Update any other constants as needed, such as DB_HOST or DB_PORT.
 **Run the pipeline**
-\`\`\`
+
+```
 python etl.py
+```
 
 **Run the SQL analysis**
-\`\`\`
-psql zara_sales -f sql/analysis.sql
 
-**Generate some visualizations**
-\`\`\`
+```
+psql zara_sales -f sql/analysis.sql
+```
+
+**Create visualizations**
+
+```
 jupyter notebook notebooks/zara_visualizations.ipynb
+```

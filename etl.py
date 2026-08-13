@@ -1,5 +1,4 @@
 """
-etl.py
 End-to-end ETL pipeline for the Zara sales dataset.
 """
 
@@ -50,16 +49,16 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 
     # Drop missing values
-    null_cols = df.columns[df.isnull().any()]
+    null_cols = [c for c in df.columns if df[c].isna().sum()]
     if null_cols:
         df = df.dropna(subset=null_cols)
-        log.info("Dropped columns: %s", ", ".join(null_cols))
+        log.info("Dropped missing value rows from column(s): %s", ", ".join(null_cols))
 
     # Drop columns with single value
     single_value_cols = [c for c in df.columns if df[c].nunique() == 1]
     if single_value_cols:
         df = df.drop(columns=single_value_cols)
-        log.info("Dropped columns: %s", ", ".join(single_value_cols))
+        log.info("Dropped columns with single value: %s", ", ".join(single_value_cols))
 
     # Rename columns
     if "terms" in df.columns:
@@ -80,7 +79,7 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# Validate
+# Validate data
 def validate(df: pd.DataFrame) -> pd.DataFrame:
     checks = {
         "null values": df.isna().sum().sum(),

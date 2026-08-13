@@ -19,7 +19,7 @@ One row per product.
 ## Pipeline
 
 1. **Extract**
-   Read the raw CSV with a semicolon delimeter scraped from Zara's product pages.
+   Read the raw CSV with a semicolon delimiter scraped from Zara's product pages.
 
 2. **Transform**
 
@@ -38,8 +38,8 @@ One row per product.
 
 - Menswear generates 91.5% of revenue at nearly double the average price ($92 vs. $50). There is heavy gap between mens vs womens product data available.
 - Womenswear products sell more when promoted; menswear products sell less when promoted.
-- Front-of-store performs best for produc placement in both men and women sections. The weakest placement is Aisle for women, End-cap for men.
-- Jackets lead through revenue per product; shoes lead through mores units sold at a lower average price.
+- Front-of-store performs best for product placement in both men and women sections. The weakest placement is Aisle for women, End-cap for men.
+- Jackets lead through revenue per product; shoes lead through more units sold at a lower average price.
 - Luxury products are the smallest price tier by product count, yet have the highest total and average revenue. Mid-range products drive the most sales volume.
 - Seasonality of products shows a notable effect only in womenswear. The share of products on promotion are identical between seasonal and non-seasonal products, ruling it out as the driver.
 

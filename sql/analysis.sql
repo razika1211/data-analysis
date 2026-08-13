@@ -60,19 +60,19 @@ WITH ranked AS (
         RANK() OVER (
             PARTITION BY section
             ORDER BY sales_volume DESC
-        ) AS revenue_rank
+        ) AS sales_rank
     FROM zara_products
 )
 SELECT section,
-    revenue_rank,
+    sales_rank,
     category,
     name,
     price,
     sales_volume
 FROM ranked
-WHERE revenue_rank <= 6
+WHERE sales_rank <= 6
 ORDER BY section,
-    revenue_rank;
+    sales_rank;
 -- Q6. Which price tier generates the most revenue?
 -- Determine product tiers
 SELECT MIN(price),

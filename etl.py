@@ -97,6 +97,13 @@ def validate(df: pd.DataFrame) -> pd.DataFrame:
         else:
             log.info("Validation — %s: pass", check)
 
+    # handle duplicate
+    if checks["duplicate product_id"]:
+        raise ValueError(
+            f"{checks['duplicate product_id']} duplicate product_id values; "
+            "cannot set primary key. Please investigate."
+        )
+
     return df
 
 

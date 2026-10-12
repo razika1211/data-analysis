@@ -91,7 +91,7 @@ FROM zara_products;
 -- Analyze tiers
 SELECT CASE
         WHEN price < 50 THEN 'Budget (<$50)'
-        WHEN price < 80 THEN 'Mid-Range ($51-$79.99)'
+        WHEN price < 80 THEN 'Mid-Range ($50-$79.99)'
         WHEN price < 110 THEN 'Premium ($80-$109.99)'
         ELSE 'Luxury ($110+)'
     END AS price_band,

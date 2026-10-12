@@ -81,5 +81,5 @@ psql zara_sales -f sql/analysis.sql
 **Create visualizations**
 
 ```
-jupyter notebook notebooks/zara_visualizations.ipynb
+jupyter notebook notebooks/zara_analysis.ipynb
 ```

@@ -9,7 +9,7 @@ from sqlalchemy import create_engine, text
 
 # Configuration
 RAW_DATA_PATH = Path("data/raw/zara.csv")
-PROCESSED_DATA_PATH = Path("data/processed/zara_clean.csv")
+PROCESSED_DATA_PATH = Path("data/processed/zara_cleaned.csv")
 
 DB_USER = "razikarahman"
 DB_HOST = "localhost"
